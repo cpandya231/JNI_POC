@@ -30,4 +30,4 @@ build/
 ### VS Code ###
 .vscode/
 **/win32-x86-64
-.mvn
+**/.mvn
