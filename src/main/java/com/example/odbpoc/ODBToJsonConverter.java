@@ -4,7 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-class ODBToJsonConverter {
+public class ODBToJsonConverter {
 
 
         private static Set<String> getNamedGroupCandidates(String regex) {
@@ -19,14 +19,14 @@ class ODBToJsonConverter {
             return namedGroups;
         }
 
-        public static  Map<String, String> convertFeaturesToJson(String text) {
+        public static  Map<String, String> convertFeaturesToJson(String line) {
             Map<String, String> resultMap=new HashMap<>();
-            String patternString = "^P (?<x>\\d(.\\d*)?) (?<y>\\d(.\\d*)?) (?<aptdef>\\d) (?<polarity>P|N) (?<dcode>\\d) (?<orientdef>\\d)( (?<rotation>\\d{0,3}))?;(?<atrs>(?<atrval>\\d*=.*)*|,|(?<atr>\\d*))*;ID=(?<id>\\d*)$";
-            Set<String> namedGroupCandidates = getNamedGroupCandidates(patternString);
+            String padMatcher = "^P (?<x>\\d(.\\d*)?) (?<y>\\d(.\\d*)?) (?<aptdef>\\d) (?<polarity>P|N) (?<dcode>\\d) (?<orientdef>\\d)( (?<rotation>\\d{0,3}))?;(?<atrs>(?<atrval>\\d*=.*)*|,|(?<atr>\\d*))*;ID=(?<id>\\d*)$";
+            Set<String> namedGroupCandidates = getNamedGroupCandidates(padMatcher);
 
-            Pattern pattern = Pattern.compile(patternString);
+            Pattern pattern = Pattern.compile(padMatcher);
 
-            Matcher matcher = pattern.matcher(text);
+            Matcher matcher = pattern.matcher(line);
 
             if(matcher.find()){
                 resultMap= namedGroupCandidates.stream().map(group -> {
@@ -37,7 +37,8 @@ class ODBToJsonConverter {
                     return kv;
     
                 }).collect(Collectors.toMap(e -> e[0], e -> e[1]));
-                System.out.println(resultMap);
+
+
     
             }
             return resultMap;

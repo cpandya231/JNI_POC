@@ -36,6 +36,12 @@
 			<artifactId>jna</artifactId>
 			<version>5.5.0</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.jruby/jruby-complete -->
+		<dependency>
+			<groupId>org.jruby</groupId>
+			<artifactId>jruby-complete</artifactId>
+			<version>9.2.9.0</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -48,6 +54,7 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+
 	</dependencies>
 
 	<build>
